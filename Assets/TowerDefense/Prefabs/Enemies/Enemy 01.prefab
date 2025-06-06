@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 274661839100997200}
   - component: {fileID: 6193208609173042958}
   - component: {fileID: 8642185768342860255}
-  - component: {fileID: 5119965685419342562}
   - component: {fileID: 3380697309213711610}
   - component: {fileID: 2490213712824717133}
   m_Layer: 6
@@ -113,22 +112,10 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &5119965685419342562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3894095414423464348}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c9675a1e3f934a4a94ff84c888d98c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &3380697309213711610
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -162,5 +149,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 693398a4237503f4fb9dda174c14317a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
   damage: 2
+  moneyPrefab: {fileID: 2096586101366248571, guid: 056bc15ee2097934db839b553b45feb6, type: 3}

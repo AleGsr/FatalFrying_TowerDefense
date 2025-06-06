@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: QuickEnemy
   m_EditorClassIdentifier: 
   enemyName: FlyEnemy
-  speed: 5
+  speed: 3
   health: 25
-  prefab: {fileID: 3407637362420126024, guid: 631f021ec74d87c4aa762be7a84c06b9, type: 3}
+  enemyPrefab: {fileID: 3407637362420126024, guid: 631f021ec74d87c4aa762be7a84c06b9, type: 3}

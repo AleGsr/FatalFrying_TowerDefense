@@ -36,13 +36,7 @@ public class Nugget : MonoBehaviour
 
     public void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == 6)
-        {
-            //Continua moviendose
-            other.gameObject.GetComponent<EnemyMovement>().ContinueMoving();
 
-
-        }
     }
 
 }

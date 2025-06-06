@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: TankEnemy
   m_EditorClassIdentifier: 
   enemyName: CockroachEnemy
-  speed: 2
+  speed: 1
   health: 100
-  prefab: {fileID: 6306945720390523223, guid: 89d2ed7465b07d64fa00bd4374c8c014, type: 3}
+  enemyPrefab: {fileID: 6306945720390523223, guid: 89d2ed7465b07d64fa00bd4374c8c014, type: 3}

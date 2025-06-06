@@ -13,11 +13,10 @@ MonoBehaviour:
   m_Name: NuggetsDefenses
   m_EditorClassIdentifier: 
   defenseName: Nugget
-  damage: 30
+  damage: 5
   range: 2
   fireRate: 0
   prefab: {fileID: 5841876481247654181, guid: 5fec663b49f5dd44c9eff3ca5a7b2976, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 7e682528601b0654a924487c1027564a, type: 3}
   cost: 50
-  health: 70
   type: 2

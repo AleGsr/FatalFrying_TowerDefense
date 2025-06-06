@@ -6,8 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/TowerDefense/Scenes/Menu.unity
+    guid: cd16cd3759cb8b04eb6c3b3fd0fc5045
+  - enabled: 1
     path: Assets/TowerDefense/Scenes/Game.unity
     guid: 846f09c852af5c8418a1ba2bb3f63eb5
+  - enabled: 1
+    path: Assets/TowerDefense/Scenes/Win.unity
+    guid: 02f4ade47e060b34596df1f274307411
+  - enabled: 1
+    path: Assets/TowerDefense/Scenes/GameOver.unity
+    guid: bb7edab5438a5c44eb2b6a6b14d89a75
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   m_UseUCBPForAssetBundles: 0

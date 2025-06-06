@@ -4,20 +4,17 @@ using System.Collections.Generic;
 [ExecuteInEditMode]
 public class MapManager : MonoBehaviour
 {
-    public GameObject pathTilePrefab;
-    public GameObject wallTilePrefab;
-    public GameObject waypointPrefab; // Puedes usar un objeto vacío o con un ícono visible
+    public GameObject tilePathPrefab;
+    public GameObject tileWallPrefab;
+    public Transform mapParent;
 
-    public int width = 10;
-    public int height = 10;
+    public int mapWidth = 10;
+    public int mapHeight = 10;
 
-    private bool[,] isPath;
-    public List<Transform> generatedWaypoints = new List<Transform>();
-    private List<Vector2Int> orderedPath = new List<Vector2Int>();
+    public List<GameObject> spawnedTiles = new List<GameObject>();
+    public List<Transform> waypoints = new List<Transform>();
 
-    public Transform waypointContainer;
-
-
+    private bool[,] pathMap;
     void Start()
     {
         GenerateMap();
@@ -25,74 +22,72 @@ public class MapManager : MonoBehaviour
 
     public void GenerateMap()
     {
-        GameObject[] enemigos = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (GameObject enemigo in enemigos)
+  
+        foreach (GameObject tile in spawnedTiles)
         {
-            enemigo.gameObject.SetActive(false);
+            if (Application.isPlaying)
+                Destroy(tile);
+            else
+                DestroyImmediate(tile);
         }
 
-        // Limpia el mapa anterior si existe
-        foreach (Transform child in transform)
-        {
-            DestroyImmediate(child.gameObject);
-        }
-        foreach (Transform wp in waypointContainer)
-        {
-            DestroyImmediate(wp.gameObject);
-        }
-        generatedWaypoints.Clear();
 
-        isPath = new bool[width, height];
-        GenerateRandomPath();
+        waypoints.Clear();
 
-        for (int y = 0; y < height; y++)
+
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemies)
         {
-            for (int x = 0; x < width; x++)
+            if (Application.isPlaying)
+                Destroy(enemy);
+            else
+                DestroyImmediate(enemy);
+        }
+
+
+        pathMap = new bool[mapWidth, mapHeight];
+
+        int currentX = Random.Range(0, mapWidth);
+        int currentY = 0;
+        pathMap[currentX, currentY] = true;
+
+        while (currentY < mapHeight - 1)
+        {
+            List<Vector2Int> directions = new List<Vector2Int>();
+
+            if (currentX > 0 && !pathMap[currentX - 1, currentY]) directions.Add(Vector2Int.left);
+            if (currentX < mapWidth - 1 && !pathMap[currentX + 1, currentY]) directions.Add(Vector2Int.right);
+            if (currentY < mapHeight - 1 && !pathMap[currentX, currentY + 1]) directions.Add(Vector2Int.up);
+
+            if (directions.Count == 0) break;
+
+            Vector2Int dir = directions[Random.Range(0, directions.Count)];
+            currentX += dir.x;
+            currentY += dir.y;
+            pathMap[currentX, currentY] = true;
+        }
+
+   
+        for (int y = 0; y < mapHeight; y++)
+        {
+            for (int x = 0; x < mapWidth; x++)
             {
-                Vector3 pos = new Vector3(x, 0, -y);
-                if (isPath[x, y])
+                Vector3 pos = new Vector3(x, 0, y);
+                GameObject tile;
+
+                if (pathMap[x, y])
                 {
-                    Instantiate(pathTilePrefab, pos, Quaternion.identity, transform);
+                    tile = Instantiate(tilePathPrefab, pos, Quaternion.identity, mapParent);
+                    waypoints.Add(tile.transform);
+
                 }
                 else
                 {
-                    Instantiate(wallTilePrefab, pos, Quaternion.identity, transform);
+                    tile = Instantiate(tileWallPrefab, pos, Quaternion.identity, mapParent);
                 }
+
+                spawnedTiles.Add(tile);
             }
-        }
-
-        // Crear waypoints en orden correcto
-        foreach (Vector2Int coords in orderedPath)
-        {
-            Vector3 pos = new Vector3(coords.x, 0, -coords.y);
-            GameObject wp = Instantiate(waypointPrefab, pos + Vector3.up * 0.1f, Quaternion.identity, waypointContainer);
-            generatedWaypoints.Add(wp.transform);
-        }
-
-        // Enviar los nuevos waypoints al EnemyManager
-        FindObjectOfType<EnemyManager>()?.SetPath(generatedWaypoints);
-    }
-
-    void GenerateRandomPath()
-    {
-        orderedPath.Clear();
-
-        int x = 0;
-        int y = 0;
-        isPath[x, y] = true;
-        orderedPath.Add(new Vector2Int(x, y));
-
-        while (x < width - 1 || y < height - 1)
-        {
-            bool moveHorizontally = Random.value > 0.5f;
-
-            if (moveHorizontally && x < width - 1)
-                x++;
-            else if (y < height - 1)
-                y++;
-
-            isPath[x, y] = true;
-            orderedPath.Add(new Vector2Int(x, y));
         }
     }
 }
