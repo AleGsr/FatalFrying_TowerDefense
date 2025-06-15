@@ -18,10 +18,10 @@ public class SelectTile : MonoBehaviour
 
     private void OnMouseDown()
     {
-        
+
         CheckTile();
-        defensesManager.PlaceDefense(tilePos + Vector3.up * 0.5f);
-        if (tileIndex == 0) 
+        defensesManager.PlaceDefense(tilePos + Vector3.up * 0f);
+        if (tileIndex == 0)
         {
             GetComponent<Renderer>().material.color = Color.blue;
         }

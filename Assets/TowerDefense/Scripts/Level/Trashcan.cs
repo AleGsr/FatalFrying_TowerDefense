@@ -8,6 +8,7 @@ public class Trashcan : MonoBehaviour
     {
         if (trashcan.gameObject.activeInHierarchy)
         {
+            Debug.Log("Trash");
             this.gameObject.SetActive(false);
             trashcan.SetActive(false);
         }

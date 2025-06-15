@@ -14,7 +14,8 @@ public class HamburguerHealth : MonoBehaviour
 
     [Header("Damage Over Time")]
     [SerializeField] float damagePerTick = 5f;
-    [SerializeField] float tickRate = 1f; // Every 1 second
+    [SerializeField] float tickRate = 1f; 
+    public AudioSource damageSound;
 
     public TextMeshProUGUI lifeHamburguerText;
 
@@ -37,6 +38,7 @@ public class HamburguerHealth : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth, 0, totalHealth);
         UpdateHealthImages();
         UpdateText();
+        damageSound.Play();
 
         if (currentHealth <= 0)
         {
@@ -55,7 +57,6 @@ public class HamburguerHealth : MonoBehaviour
         }
     }
 
-    // Trigger logic
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))

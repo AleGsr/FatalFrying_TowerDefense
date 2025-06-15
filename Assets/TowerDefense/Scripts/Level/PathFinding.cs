@@ -73,10 +73,6 @@ public class PathFinding : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            Debug.LogError("cells aún no ha sido inicializado.");
-        }
     }
 
     public void FindPath(Vector3 startPos, Vector3 endPos)
@@ -184,9 +180,9 @@ public class PathFinding : MonoBehaviour
         }
     }
 
-    private void ResetBoard()
+    public void ResetBoard()
     {
-        enemyManager.RemoveAllEnemies(); // Solo eliminamos enemigos en el reset
+        enemyManager.RemoveAllEnemies(); 
         GenerateGrid();
         FindPath(startPoint, endPoint);
         DrawPath();

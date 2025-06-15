@@ -1,15 +1,22 @@
 using UnityEngine;
-
+using System.Collections;
 public class Nugget : MonoBehaviour
 {
-    private DefensesData data;
     public int damage = 10;
     public int _health;
+
+    [Header("Disapear")]
+    public float totalTime = 30;
+    public float countTime;
+
+    public float damageTiming = 2;
+
+    public GameObject model;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        StartCoroutine(Timing());
     }
 
     // Update is called once per frame
@@ -21,22 +28,26 @@ public class Nugget : MonoBehaviour
         }
     }
 
-    public void OnTriggerStay(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 6)
+        if (other.gameObject.CompareTag("Enemy"))
         {
-            //Deja de moverse
-            //other.gameObject.GetComponent<EnemyMovement>().StopMoving();
-            //Le hace daño al enemigo
-            other.gameObject.GetComponent<Enemy>().TakeDamage(damage);
-            other.gameObject.GetComponent<Enemy>().MakeDamage(_health);
+            Enemy enemy = other.GetComponent<Enemy>();
+            enemy.TakeDamage(damage);
+            enemy.MakeDamage(_health);
         }
+
         
     }
 
-    public void OnTriggerExit(Collider other)
+    private IEnumerator Timing()
     {
-
+        yield return new WaitForSeconds(totalTime);
+        this.gameObject.SetActive(false);
     }
 
+
 }
+
+
+

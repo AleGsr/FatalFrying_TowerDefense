@@ -1,12 +1,15 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using System.Collections.Generic;
-
 
 public class DefensesManager : MonoBehaviour
 {
     public GameObject[] prefabsList;
     public PlayerManager playerManager;
+    public AudioSource putFood;
+    public AudioSource putSoda;
+
+    public GameObject friesSelected;
+    public GameObject sodaSelected;
+    public GameObject nuggetSelected;
 
     public int idDefense = 0;
 
@@ -18,19 +21,30 @@ public class DefensesManager : MonoBehaviour
         {
             case 1:
                 if (playerManager.FriesCost())
-                    Instantiate(prefabsList[0], position, Quaternion.identity);
+                    putFood.Play();
+                Instantiate(prefabsList[0], position, Quaternion.identity);
+                ResetID();
+                friesSelected.gameObject.SetActive(false);
                 break;
             case 2:
                 if (playerManager.SodaCost())
-                    Instantiate(prefabsList[1], position, Quaternion.identity);
+                    putSoda.Play();
+                Instantiate(prefabsList[1], position, Quaternion.identity);
+                ResetID();
+                sodaSelected.gameObject.SetActive(false);
                 break;
             case 3:
                 if (playerManager.NuggetCost())
-                    Instantiate(prefabsList[2], position, Quaternion.identity);
+                    putFood.Play();
+                Instantiate(prefabsList[2], position, Quaternion.identity);
+                ResetID();
+                nuggetSelected.gameObject.SetActive(false);
                 break;
             case 4:
                 if (playerManager.SaucesCost())
-                    Instantiate(prefabsList[3], position, Quaternion.identity);
+                    putFood.Play();
+                Instantiate(prefabsList[3], position, Quaternion.identity);
+                ResetID();
                 break;
         }
     }
@@ -40,10 +54,10 @@ public class DefensesManager : MonoBehaviour
     public void AddNugget() { idDefense = 3; }
     public void AddSauce() { idDefense = 4; }
 
-    void RemoveDefense()
+    public void ResetID()
     {
-        /*Cuando se tenga activo el bote de basura, entonces al darle clic a 
-        una defensa esta se va a desactivar*/
+        idDefense = 0;
     }
+
 
 }

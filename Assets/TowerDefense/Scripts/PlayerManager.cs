@@ -1,12 +1,11 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance { get; private set; }
 
-    public float totalMoney = 100;
+    public float totalMoney = 35;
     public TextMeshProUGUI moneyText;
     public TextMeshProUGUI friesCostText;
     public TextMeshProUGUI nuggetCostText;
@@ -27,6 +26,7 @@ public class PlayerManager : MonoBehaviour
     public float nuggetCost = 30;
     public float sauceCost = 50;
 
+    public AudioSource moneySound;
 
     private void Awake()
     {
@@ -46,6 +46,8 @@ public class PlayerManager : MonoBehaviour
         nuggetCostText.text = ("$" + nuggetCost);
         sodaCostText.text = ("$" + sodaCost);
         sauceCostText.text = ("$" + sauceCost);
+
+        CheckImageFridge();
     }
 
     public bool FriesCost() { return TryBuy(friesCost); }
@@ -59,6 +61,7 @@ public class PlayerManager : MonoBehaviour
         {
             totalMoney -= cost;
             UpdateMoneyText();
+            CheckImageFridge();
             return true;
         }
         return false;
@@ -74,6 +77,8 @@ public class PlayerManager : MonoBehaviour
     {
         totalMoney += amount;
         UpdateMoneyText();
+        CheckImageFridge();
+        moneySound.Play();
     }
 
     public void CheckImageFridge()

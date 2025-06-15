@@ -1,45 +1,51 @@
 using System.Xml.Serialization;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class Soda : MonoBehaviour
 {
-    float totalCount = 30;
-    public float counting;
+    private float counting;
+    public float sodaTime= 30;
+    public float liquidTime= 30;
+
+    public GameObject sodaModel;
+    public GameObject liquidModel;
+    public int damage = 1;
+
+    private EnemyManager enemyManager;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        counting = totalCount;
+        enemyManager = FindObjectOfType<EnemyManager>();
+        StartCoroutine(Timing());
     }
 
     // Update is called once per frame
     void Update()
     {
-        Timer();
-        Disapear();
+
     }
 
-    void SlowEnemy()
+    public void OnTriggerStay(Collider other)
     {
-        //Cuando lo pisen su velocidad bajará temporalmente
-    }
-
-    void Damage()
-    {
-        //Cuando lo pisen se les bajara la vida
-    }
-
-    void Timer()
-    {
-        counting -= Time.deltaTime;
-    }
-
-    void Disapear()
-    {
-        if(counting <= 0)
+        if (other.CompareTag("Enemy"))
         {
-            this.gameObject.SetActive(false);
+            Enemy enemy = other.GetComponent<Enemy>();
+            enemy.TakeDamage(damage);
+            enemy.ActiveFreeze();
         }
+    }
+
+    private IEnumerator Timing()
+    {
+        yield return new WaitForSeconds(sodaTime);
+        sodaModel.SetActive(false);
+        liquidModel.SetActive(true);
+
+        yield return new WaitForSeconds(liquidTime);
+        this.gameObject.SetActive(false);
     }
 }

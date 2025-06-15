@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6402915513767044687}
+  - component: {fileID: 6349117548143693669}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -31,3 +32,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 13.162, y: 90, z: 0}
+--- !u!114 &6349117548143693669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4409515847084947551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6da54348e10618643b9635b2989d627d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 2553076488679437020, guid: 6336f76cd68b3c54994a613a1145bc11, type: 3}
+  shootInterval: 1.5
+  actSound: {fileID: 7633013583111601131, guid: c81df3b0f0a7bea479e65876d460119b, type: 3}

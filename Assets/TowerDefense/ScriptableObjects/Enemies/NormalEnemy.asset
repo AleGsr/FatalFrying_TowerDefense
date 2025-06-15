@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: NormalEnemy
   m_EditorClassIdentifier: 
   enemyName: AntEnemy
-  speed: 2
-  health: 50
+  speed: 1
+  health: 10
   enemyPrefab: {fileID: 3894095414423464348, guid: 695b1ed9e6cddec43b63cefa6c40f08b, type: 3}

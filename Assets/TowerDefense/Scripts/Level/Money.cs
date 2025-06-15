@@ -3,13 +3,13 @@ using UnityEngine;
 public class Money : MonoBehaviour
 {
     public int minMoney = 5;
-    public int maxMoney = 30;
+    public int maxMoney = 20;
+
 
     void OnMouseDown()
     {
         int moneyAmount = Random.Range(minMoney, maxMoney);
-        PlayerManager.Instance.AddMoney(moneyAmount); // Sumar dinero al jugador
-
-        Destroy(gameObject); // Eliminar el objeto de dinero al recogerlo
+        PlayerManager.Instance.AddMoney(moneyAmount); 
+        this.gameObject.SetActive(false); 
     }
 }

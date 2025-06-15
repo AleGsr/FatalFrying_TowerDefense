@@ -5,7 +5,8 @@ using UnityEngine.UI;
 public class DefensesData : ScriptableObject
 {
     public string defenseName;
-    public float damage;
+    public int health;
+    public int damage;
     public float range;
     public float fireRate;
    
